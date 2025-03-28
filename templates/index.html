@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+
+    <!-- Favicon (Optional) -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Google Font & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <div class="container">
+        <h1>📝 To-Do List</h1>
+
+        <!-- Task Input Form -->
+        <form action="/add" method="POST" class="input-container">
+            <input type="text" name="task" placeholder="Enter a task..." required>
+            <button type="submit">➕ Add Task</button>
+        </form>
+
+        <!-- Task List -->
+        <ul class="task-list">
+            {% for task in tasks %}
+                <li class="task-item {% if task.status == 'Completed' %}completed{% endif %}">
+                    <span>{{ task.task }}</span>
+
+                    <div class="task-actions">
+                        <a href="/update/{{ task._id }}" class="update-btn">✔</a>
+                        <a href="/delete/{{ task._id }}" class="delete-btn">✖</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Link to JavaScript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
