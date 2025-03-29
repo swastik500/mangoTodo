@@ -14,7 +14,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh; /* Adjust height to avoid overflow */
+    padding: 20px;
 }
 
 /* 📌 Main Container */
@@ -40,11 +41,11 @@ h1 {
 /* 📌 Task Input */
 .input-container {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    gap: 10px;
     background: rgba(255, 255, 255, 0.1);
     padding: 10px;
     border-radius: 10px;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
 }
 
 input[type="text"] {
@@ -55,6 +56,7 @@ input[type="text"] {
     background: transparent;
     color: white;
     font-size: 16px;
+    min-width: 0; /* Fix input shrinking issue */
 }
 
 input::placeholder {
@@ -71,6 +73,7 @@ button {
     font-size: 16px;
     cursor: pointer;
     transition: 0.3s;
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
 button:hover {
@@ -93,17 +96,35 @@ li {
     border-radius: 8px;
     margin: 10px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
 }
 
-/* ❌ Delete Button */
-.delete-btn {
-    background: #ef4444;
-    color: white;
-    border: none;
+/* ✔ Update and ❌ Delete Buttons */
+.task-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.update-btn, .delete-btn {
     padding: 8px 12px;
     border-radius: 5px;
     cursor: pointer;
     transition: 0.3s;
+    text-decoration: none;
+}
+
+.update-btn {
+    background: #34d399;
+    color: white;
+}
+
+.update-btn:hover {
+    background: #059669;
+}
+
+.delete-btn {
+    background: #ef4444;
+    color: white;
 }
 
 .delete-btn:hover {
@@ -113,14 +134,39 @@ li {
 /* 📱 Responsive Design */
 @media (max-width: 600px) {
     .container {
-        width: 95%;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .input-container {
+        flex-direction: column;
+        gap: 5px;
     }
 
     input[type="text"] {
         font-size: 14px;
+        width: 100%;
+        padding: 12px;
     }
 
     button {
         font-size: 14px;
+        width: 100%;
+    }
+
+    .task-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+
+    .task-actions {
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 10px;
     }
 }
