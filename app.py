@@ -1,50 +1,37 @@
-from flask import Flask, render_template, request, redirect, url_for, g
+from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+import os
 
 app = Flask(__name__)
 
-MONGO_URI = "mongodb+srv://sojupingale:swip2004@swip.b9vgs6y.mongodb.net/?retryWrites=true&w=majority&appName=swip"
+# MongoDB Atlas connection
+MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://sojupingale:swip2004@swip.b9vgs6y.mongodb.net/?retryWrites=true&w=majority&appName=swip")
+client = MongoClient(MONGO_URI)
+db = client["todoDB"]
+collection = db["tasks"]
 
-def get_db():
-    """Ensure a fresh MongoDB connection per request."""
-    if 'client' not in g:
-        g.client = MongoClient(MONGO_URI)  # Create a new client per request
-        g.db = g.client["todoDB"]
-    return g.db["tasks"]
+@app.route('/')
+def index():
+    tasks = list(collection.find())  # Fetch all tasks
+    return render_template('index.html', tasks=tasks)
 
-@app.route("/")
-def home():
-    task_collection = get_db()
-    tasks = list(task_collection.find())
-    return render_template("index.html", tasks=tasks)
-
-@app.route("/add", methods=["POST"])
+@app.route('/add', methods=['POST'])
 def add_task():
-    task_collection = get_db()
-    task = request.form.get("task")
-    if task:
-        task_collection.insert_one({"task": task, "status": "Pending"})
-    return redirect(url_for("home"))
+    task_content = request.form.get('task')
+    if task_content:
+        collection.insert_one({"task": task_content, "status": "Pending"})
+    return redirect(url_for('index'))
 
-@app.route("/update/<task_id>")
+@app.route('/update/<task_id>')
 def update_task(task_id):
-    task_collection = get_db()
-    task_collection.update_one({"_id": ObjectId(task_id)}, {"$set": {"status": "Completed"}})
-    return redirect(url_for("home"))
+    collection.update_one({"_id": ObjectId(task_id)}, {"$set": {"status": "Completed"}})
+    return redirect(url_for('index'))
 
-@app.route("/delete/<task_id>")
+@app.route('/delete/<task_id>')
 def delete_task(task_id):
-    task_collection = get_db()
-    task_collection.delete_one({"_id": ObjectId(task_id)})
-    return redirect(url_for("home"))
+    collection.delete_one({"_id": ObjectId(task_id)})
+    return redirect(url_for('index'))
 
-@app.teardown_appcontext
-def close_db(exception=None):
-    """Close the MongoDB connection after request is complete."""
-    client = g.pop('client', None)
-    if client is not None:
-        client.close()
-
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=10000, debug=True)
