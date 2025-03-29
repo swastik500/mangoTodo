@@ -11,10 +11,8 @@
     <!-- Link to CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-    <!-- Google Font & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
 </head>
 <body>
 
@@ -31,7 +29,7 @@
         <ul class="task-list">
             {% for task in tasks %}
                 <li class="task-item {% if task.status == 'Completed' %}completed{% endif %}">
-                    <span>{{ task.task }}</span>
+                    <span class="task-text">{{ task.task }}</span>
 
                     <div class="task-actions">
                         <a href="/update/{{ task._id }}" class="update-btn">✔</a>
