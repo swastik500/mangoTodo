@@ -1,0 +1,115 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* 🌙 Dark Mode Background */
+body {
+    background: #1e1e2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+/* 📌 Login/Register Container */
+.auth-container {
+    background: #2e2e3e;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+/* 🔑 Title */
+.auth-container h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #8f5fe8;
+    margin-bottom: 20px;
+}
+
+/* 📌 Form Styling */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* 🔠 Input Fields */
+.auth-form input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    outline: none;
+    background: transparent;
+    color: #e0e0e0;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.auth-form input:focus {
+    border-color: #8f5fe8;
+    box-shadow: 0 0 10px rgba(143, 95, 232, 0.5);
+}
+
+/* 🖱️ Buttons */
+.auth-btn {
+    background: #8f5fe8;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+.auth-btn:hover {
+    background: #7b4acb;
+    transform: scale(1.05);
+}
+
+/* 🔗 Link to Register/Login */
+.auth-link {
+    margin-top: 10px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.auth-link a {
+    color: #8f5fe8;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 480px) {
+    .auth-container {
+        max-width: 350px;
+    }
+
+    .auth-form input {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .auth-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

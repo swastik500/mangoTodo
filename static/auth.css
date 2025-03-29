@@ -1,0 +1,89 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* 🌙 Dark Mode Background */
+body {
+    background: #1e1e2e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* 📌 Authentication Container */
+.auth-container {
+    background: #2e2e3e;
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+h2 {
+    font-size: 26px;
+    font-weight: 600;
+    color: #8f5fe8;
+    margin-bottom: 15px;
+}
+
+/* 📌 Input Fields */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+    font-size: 16px;
+    outline: none;
+}
+
+input::placeholder {
+    color: rgba(224, 224, 224, 0.5);
+}
+
+/* 📌 Submit Button */
+button {
+    background: #8f5fe8;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 600;
+    width: 100%;
+}
+
+button:hover {
+    background: #7b4acb;
+    transform: scale(1.05);
+}
+
+/* 📌 Link to Register/Login */
+p {
+    color: #e0e0e0;
+    margin-top: 10px;
+}
+
+p a {
+    color: #8f5fe8;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+p a:hover {
+    text-decoration: underline;
+}

@@ -17,6 +17,14 @@
 <body>
 
     <div class="container">
+        <!-- Logout Button (Visible only when logged in) -->
+        {% if session['user'] %}
+            <div class="logout-container">
+                <span>Welcome, {{ session['user'] }}!</span>
+                <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+            </div>
+        {% endif %}
+
         <h1>📝 To-Do List</h1>
 
         <!-- Task Input Form -->
